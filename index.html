@@ -130,9 +130,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0d1b2a;overflow:hidden;
 .q-opt{border-radius:8px;padding:7px 16px;font-size:clamp(12px,1.5vw,16px);font-weight:700;border:2px solid #ddd;background:#f7f7f7;color:#333;cursor:default}
 .think-banner{background:rgba(0,172,193,.1);border:1.5px solid rgba(0,172,193,.3);border-radius:12px;padding:12px 20px;text-align:center;font-size:clamp(13px,1.5vw,17px);color:#00363a;font-weight:600;flex-shrink:0}
 
-/* ── QUIZ A ── */
-.quiza-slide{background:#f0fff4;flex-direction:column}
-.qa-box{background:#fff;border-radius:13px;padding:15px 20px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+/* ── QUIZ REVEAL ── */
+.q-reveal-btn{margin-top:6px;padding:6px 18px;background:#00363a;color:#fff;border:none;border-radius:8px;font-size:clamp(11px,1.2vw,14px);font-weight:700;cursor:pointer;transition:background .15s}
+.q-reveal-btn:hover{background:#005f66}
+.q-ans-reveal{display:none;margin-top:8px}
+.q-ans-reveal.open{display:block}
 .qa-opt{border-radius:8px;padding:7px 16px;font-size:clamp(12px,1.5vw,16px);font-weight:700;border:2px solid #ddd;background:#f7f7f7;color:#999;cursor:default}
 .qa-opt.correct{background:#e8f5e9;border-color:#2e7d52;color:#1a5c35}
 .qa-opt.correct::after{content:' ✓';font-weight:900}
@@ -517,53 +519,52 @@ function stdDrillHTML(){
 
 function feedbackHTML(){
   return `<div class="slide fb-slide">
-  <div class="s-head" style="background:#00263a">Feedback Guide — Common Student Errors <span class="badge" style="background:rgba(255,255,255,.14)">Teacher Reference</span></div>
-  <div class="s-body" style="flex-direction:column;gap:11px">
+  <div class="s-head" style="background:#00263a">Watch Out! — Common Mistakes with Voiceless Consonants <span class="badge" style="background:rgba(255,255,255,.14)">Common Mistakes</span></div>
+  <div class="s-body" style="flex-direction:column;gap:11px;overflow-y:auto">
     <div class="fb-grid">
       <div class="fb-card">
-        <h3 style="color:#D32F2F">⚠️ /p/ /t/ /k/ — Most common mistakes</h3>
+        <h3 style="color:#D32F2F">⚠️ /p/ /t/ /k/ — Not enough air</h3>
         <ul class="fb-list">
-          <li>Not enough aspiration → remind: "Feel the puff of air on your hand!"</li>
-          <li>Adding an extra vowel after the sound (e.g. "pen" → "pe-nu") → "Stop cleanly — no extra sound!"</li>
-          <li>Voicing the consonant (sounds like /b/ /d/ /g/) → "Keep your throat silent"</li>
-          <li>Tip: Use a tissue or strip of paper — it should visibly move</li>
+          <li>Hold your hand in front of your mouth — you should feel a <strong>puff of air</strong> each time</li>
+          <li>Adding an extra vowel after the sound? (e.g. "pen" → "pe-nu") → <strong>stop cleanly</strong>, no extra sound</li>
+          <li>Does it sound like /b/ /d/ /g/? → your throat should be <strong>completely silent</strong></li>
+          <li>Try using a tissue — it should visibly flutter when you say /p/, /t/, /k/</li>
         </ul>
       </div>
       <div class="fb-card">
-        <h3 style="color:#00897B">⚠️ /f/ and /θ/ — Most common mistakes</h3>
+        <h3 style="color:#00897B">⚠️ /f/ and /θ/ — Wrong mouth position</h3>
         <ul class="fb-list">
-          <li>/θ/ replaced with /s/ → compare <span class="fb-pair">think /θ/</span> vs <span class="fb-pair">sink /s/</span></li>
-          <li>/θ/ replaced with /f/ → compare <span class="fb-pair">three /θ/</span> vs <span class="fb-pair">free /f/</span></li>
-          <li>/f/ made with both lips instead of teeth+lip → remind: "Top teeth on bottom lip!"</li>
-          <li>Tip: For /θ/, have students exaggerate by sticking the tongue out slightly at first, then reduce</li>
+          <li>/θ/ → /s/? Compare <span class="fb-pair">think /θ/</span> vs <span class="fb-pair">sink /s/</span> — for /θ/ your tongue touches your teeth</li>
+          <li>/θ/ → /f/? Compare <span class="fb-pair">three /θ/</span> vs <span class="fb-pair">free /f/</span> — /θ/ uses the tongue, /f/ uses the lip</li>
+          <li>/f/ with both lips? → <strong>top teeth on bottom lip</strong> — not lip-to-lip</li>
+          <li>For /θ/: try exaggerating at first — stick your tongue out slightly, then slowly reduce it</li>
         </ul>
       </div>
       <div class="fb-card">
-        <h3 style="color:#1976D2">⚠️ /s/ and /ʃ/ — Most common mistakes</h3>
+        <h3 style="color:#1976D2">⚠️ /s/ and /ʃ/ — Mixing them up</h3>
         <ul class="fb-list">
-          <li>Confusing /s/ and /ʃ/ → compare <span class="fb-pair">see /s/</span> vs <span class="fb-pair">she /ʃ/</span></li>
-          <li>/ʃ/ lips not rounded enough → remind: "Round your lips a little, like saying 'oo'"</li>
-          <li>/s/ too soft (sounds like /ʃ/) → "Bring your tongue closer to your teeth for a sharper hiss"</li>
-          <li>Tip: Practice alternating "sss-shh-sss-shh" to feel the tongue move back and forth</li>
+          <li>Compare <span class="fb-pair">see /s/</span> vs <span class="fb-pair">she /ʃ/</span> — can you hear the difference?</li>
+          <li>/ʃ/ not sounding right? → <strong>round your lips slightly</strong>, like the start of "oo"</li>
+          <li>/s/ sounds too soft? → bring your tongue <strong>closer to your teeth</strong> for a sharper hiss</li>
+          <li>Practice: say "sss-shh-sss-shh" — feel your tongue move back and forth</li>
         </ul>
       </div>
       <div class="fb-card">
-        <h3 style="color:#5D4037">⚠️ /tʃ/ and /h/ — Most common mistakes</h3>
+        <h3 style="color:#5D4037">⚠️ /tʃ/ and /h/ — Two tricky ones</h3>
         <ul class="fb-list">
-          <li>/tʃ/ said as two sounds ("t-sh") → remind: "One quick burst — glue /t/ and /ʃ/ together!"</li>
-          <li>/tʃ/ confused with /ʃ/ → compare <span class="fb-pair">cheap /tʃ/</span> vs <span class="fb-pair">sheep /ʃ/</span></li>
-          <li>/h/ dropped entirely → compare <span class="fb-pair">hat /h/</span> vs <span class="fb-pair">at (no /h/)</span></li>
-          <li>Tip: For /h/, practice a relaxed "haaa" sigh before adding the vowel</li>
+          <li>/tʃ/ → two sounds ("t-sh")? → it must be <strong>one quick burst</strong> — glue /t/ and /ʃ/ together</li>
+          <li>Confusing /tʃ/ with /ʃ/? → compare <span class="fb-pair">cheap /tʃ/</span> vs <span class="fb-pair">sheep /ʃ/</span></li>
+          <li>/h/ disappearing? → compare <span class="fb-pair">hat /h/</span> vs <span class="fb-pair">at (no /h/)</span> — the /h/ must be there</li>
+          <li>For /h/: try a relaxed "haaa" sigh first, then shorten it into the word</li>
         </ul>
       </div>
       <div class="fb-card">
-        <h3 style="color:#00363a">✅ Positive feedback phrases</h3>
+        <h3 style="color:#00363a">💡 Self-check for all voiceless consonants</h3>
         <ul class="fb-list">
-          <li>"Great — I felt the air on my hand that time!"</li>
-          <li>"Perfect — your throat was completely silent."</li>
-          <li>"Almost — try a sharper burst of air for that one."</li>
-          <li>"Listen to the difference: <em>think</em> vs <em>sink</em> — can you hear it?"</li>
-          <li>"That /tʃ/ was one clean sound — nice!"</li>
+          <li>The golden rule: <strong>put your hand on your throat</strong> — it should NOT vibrate for any of these sounds</li>
+          <li>Hold paper in front of your mouth — it should move for /p/ /t/ /k/ /f/ /θ/ /s/ /ʃ/ /tʃ/</li>
+          <li>Record yourself: compare your /s/ and /ʃ/ — do they sound different?</li>
+          <li>Minimal pairs: <span class="fb-pair">think/sink</span>, <span class="fb-pair">cheap/sheep</span>, <span class="fb-pair">see/she</span>, <span class="fb-pair">hat/at</span></li>
         </ul>
       </div>
     </div>
@@ -571,31 +572,23 @@ function feedbackHTML(){
 }
 
 function quizQHTML(){
-  const qs=QUIZ.map((q,i)=>`
-    <div class="q-box">
+  const qs=QUIZ.map((q,i)=>{
+    const id=`qrev-${i}`;
+    const opts=q.opts.map((o,ci)=>`<div class="q-opt${ci===q.ans?' correct':''}">${o}</div>`).join('');
+    return `<div class="q-box">
       <div class="q-num">Question ${i+1} of ${QUIZ.length}</div>
       <div class="q-text">${q.q}</div>
-      <div class="q-opts">${q.opts.map(o=>`<div class="q-opt">${o}</div>`).join('')}</div>
-    </div>`).join('');
+      <div class="q-opts" style="margin-bottom:7px">${q.opts.map(o=>`<div class="q-opt">${o}</div>`).join('')}</div>
+      <button class="q-reveal-btn" onclick="toggleAns(this,'${id}')">Show Answer</button>
+      <div class="q-ans-reveal" id="${id}">
+        <div class="q-opts" style="margin-bottom:6px">${opts}</div>
+        <div class="qa-hint">💡 ${q.hint}</div>
+      </div>
+    </div>`;
+  }).join('');
   return `<div class="slide quizq-slide">
-  <div class="s-head" style="background:#00363a">Mini Quiz — Questions <span class="badge" style="background:rgba(255,255,255,.14)">Think first!</span></div>
-  <div class="s-body" style="flex-direction:column;justify-content:space-evenly;gap:10px">
-    <div class="think-banner">🤔 Read each question — think about your answer before the next slide!</div>
-    <div class="q-grid">${qs}</div>
-  </div></div>`;
-}
-
-function quizAHTML(){
-  const qs=QUIZ.map((q,i)=>`
-    <div class="qa-box">
-      <div class="q-num">Question ${i+1} — Answer</div>
-      <div class="q-text" style="margin-bottom:8px">${q.q}</div>
-      <div class="q-opts" style="margin-bottom:7px">${q.opts.map((o,ci)=>`<div class="qa-opt${ci===q.ans?' correct':''}">${o}</div>`).join('')}</div>
-      <div class="qa-hint">💡 ${q.hint}</div>
-    </div>`).join('');
-  return `<div class="slide quiza-slide">
-  <div class="s-head" style="background:#1e5f3a">Mini Quiz — Answers <span class="badge" style="background:rgba(255,255,255,.14)">How did you do?</span></div>
-  <div class="s-body" style="flex-direction:column;justify-content:space-evenly;gap:10px">
+  <div class="s-head" style="background:#00363a">Mini Quiz <span class="badge" style="background:rgba(255,255,255,.14)">Check Your Answers</span></div>
+  <div class="s-body" style="flex-direction:column;gap:10px;overflow-y:auto;justify-content:flex-start">
     <div class="q-grid">${qs}</div>
   </div></div>`;
 }
@@ -654,8 +647,14 @@ function build(){
   const c=document.getElementById('slides');
   let h=titleHTML()+overviewHTML();
   PH.forEach((p,i)=>{h+=explainHTML(p,i+1);h+=drillHTML(p,i+1);});
-  h+=stdDrillHTML()+feedbackHTML()+quizQHTML()+quizAHTML()+summaryHTML()+freeConvHTML();
+  h+=stdDrillHTML()+feedbackHTML()+quizQHTML()+summaryHTML()+freeConvHTML();
   c.innerHTML=h;
+}
+
+function toggleAns(btn,id){
+  const el=document.getElementById(id);
+  const open=el.classList.toggle('open');
+  btn.textContent=open?'Hide':'Show Answer';
 }
 
 let cur=0,SL=[];
